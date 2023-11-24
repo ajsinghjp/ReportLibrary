@@ -1,3 +1,10 @@
+   /*Code and project Details 
+   Client Name : ONL
+   Module Name  WL
+  Product : Any WL product
+  */
+
+   
    protected override void InitializeLedgerReports(List<SalesPortal.LedgerReport> ledgerReports)
         {
             LedgerReport ledger = new LedgerReport((Int32)LedgerReportId.Default);			
@@ -55,3 +62,5 @@
 
 			return textBuilder.GetTable();
 		}
+
+	

@@ -90,26 +90,26 @@ namespace InsTech.ForeSight.SalesPortal.Life.WL.iText
 			textBuilder.NextColumn();
 			textBuilder.SpaceBetween = 1.5f;
 			textBuilder.AddItemXML("CT_WL_LB_Title_Para1");
-			if (InputSupplement.APIDumpInAmount > 0 && InputSupplement.ExchangeAmount > 0 && InputSupplement.API1035Amount > 0 && InputSupplement.NonAPI1035Amount > 0)
-			{
-				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_APIAndExchGtAPI1035");
-			}
-			else if (InputSupplement.APIDumpInAmount > 0 && InputSupplement.ExchangeAmount > 0)
-			{
-				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_APIAndExch");
-			}
-			else if (InputSupplement.ExchangeAmount > 0 && InputSupplement.API1035Amount > 0 && InputSupplement.NonAPI1035Amount > 0)
-			{
-				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_ExchGtAPI1035");
-			}
-			else if (InputSupplement.ExchangeAmount > 0)
-			{
-				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_Exch");
-			}
-			else if (InputSupplement.APIDumpInAmount > 0)
-			{
+			//if (InputSupplement.APIDumpInAmount > 0 && InputSupplement.ExchangeAmount > 0 && InputSupplement.API1035Amount > 0 && InputSupplement.NonAPI1035Amount > 0)
+			//{
+			//	textBuilder.AddItemXML("CT_WL_LB_Title_Para2_APIAndExchGtAPI1035");
+			//}
+			//else if (InputSupplement.APIDumpInAmount > 0 && InputSupplement.ExchangeAmount > 0)
+			//{
+			//	textBuilder.AddItemXML("CT_WL_LB_Title_Para2_APIAndExch");
+			//}
+			//else if (InputSupplement.ExchangeAmount > 0 && InputSupplement.API1035Amount > 0 && InputSupplement.NonAPI1035Amount > 0)
+			//{
+			//	textBuilder.AddItemXML("CT_WL_LB_Title_Para2_ExchGtAPI1035");
+			//}
+			//else if (InputSupplement.ExchangeAmount > 0)
+			//{
+			//	textBuilder.AddItemXML("CT_WL_LB_Title_Para2_Exch");
+			//}
+			//else if (InputSupplement.APIDumpInAmount > 0)
+			//{
 				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_API");
-			}
+			//}
 
 			textBuilder.AddItemXML("CT_WL_LB_Title_Para3");
 		
