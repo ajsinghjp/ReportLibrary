@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--										R E A D  M E
+  "Enums use in XML  developer can copy a enum value from here and pest to set properties
+  =======================================================================================
+  public enum BorderStyle
+	{
+		None,                   Left,                 Right,            Top,              Bottom,            LeftRight,   
+    TopBottom,              TopRight,         		TopLeft,          TopLeftRight, 		BottomRight, 		   BottomLeft,
+    BottomLeftRight,    		TopBottomLeft,      	TopBottomRight,		TopBottomLeftRight,
+	}
+ 
+  public enum Alignment
+	{
+      Left,       Right,      Center,     Justify,
+  }
+  
+  =======================================================================================
+  <Root> = Root element for xml file
+    <Report ID  = "24" > This attribute holds a ledger report ID to customize and format.
+     <ITNumberFormatProvider 
+                        Name                = 
+                                              Description : This string type attribute hold the name of number format provider the provider name used to bind a provider to a specific column
+                                              Type        : String
+                                              Default     : None
+                        Type                = 
+                                              Description : type of format provider for example currency,percentage or number
+                                              Type        : string
+                                              Default     : "c"
+                                              Option      :
+                                                            1. "c" - this should be use for currency format provder
+                                                            2. "p" - this should be  for percantage fort provide 
+                                                            3. "n" - this Should be use for number format provider
+                        DecimalDigits       =   
+                                              Description : This attribute hold the no. of decimal point that should be display in formated string
+                                              Type        : Int32
+                                              Default     : -1  (The default value "-1" means the provider will take the default number of decimal 
+                                                                      digit according to current system culture settings in other word you can leave 
+                                                                      it on system settings by setting "-1") 
+                                                                
+                        DecimalSeparator    = 
+                                              Description : This attribute hold the character for Double Separator.
+                                              Type        : string
+                                              Default     : "" (The default value "" means the provider will take the default Double Separator 
+                                                                      character according to current system culture settings in other word you can leave it on 
+                                                                      system settings by setting "") 
+                        GroupSaperator      = 
+                                              Description : This attribute hold the character for Group Saperator.
+                                              Type        : string
+                                              Default     : "" (The default value "" means the provider will take the default group Separator  
+                                                                      character according to current system culture settings in other word you 
+                                                                      can leave it on system settings by setting "") 
+                        GroupSizes          = 
+                                              Description : This attribute hold the coma saperated array which will convert in a Int[] array in base code
+                                              Type        : string 
+                                              Default     : "" (The default value "" means the provider will take the default group sizes  
+                                                                      Array according to current system culture settings current culture 
+                                                                      settings in other word you can leave it on system settings by setting "") 
+                                                           Example :
+                                                              GroupSizes = "3" - $2,100,000.00           
+                                                              GroupSizes = "3,2" - $21,00,000.00           
+                                                              
+                        NegativePattern     =  
+                                              Description : this attribute hold a style in which negative value should be print
+                                              Type        : Int32
+                                              Default     : (The default value "" means the provider will take the default Negative Pattern  
+                                                             style according to current system culture settings in other word you 
+                                                             can leave it on system settings by setting "") 
+                                                                      
+                                              Option   Style        Option   Style      Option   Style
+                                              .......  .....        ......   .....      ......   ......
+                                              0       ($999)        6       999-$       12      $ -999 
+                                              1       -$999         7       999$-       13      999- $ 
+                                              2       $-999         8       -999 $      14      ($ 999) 
+                                              3       $999-         9       -$ 999      15      (999 $)
+                                              4       (999$)        10      999 $- 
+                                              5       -999$         11      $ 999- 
+                        PositivePattern =  
+                                              Description : this attribute hold a style in which positive value should be print
+                                              Type        : Int32
+                                              Default     : (The default value "" means the provider will take the default Positive Pattern  
+                                                             style according to current system culture settings in other word you can leave 
+                                                             it on system settings by setting "") 
+                                              Option   Style
+                                              .......  .....
+                                              0       $999 
+                                              1       999$ 
+                                              2       $ 999 
+                                              3       999 $ 
+                                            
+                        Symbol            = 
+                                              Description : this attribute hold the currency or percentage symbol according to provider type.
+                                              Type        : string
+                                              Default     : "" (The default value "" means the provider will take the default Symbol
+                                                                character according to current system culture settings in other
+                                                                word you can leave it on system settings by setting "") 
+                             
+              <ColumnReportConfig  = This element encapsulates all report level formatting attributes. 
+                        
+                        YearstoIllustrate =  
+                                            Description : This attribute holds the number of years that the current model should be run. Also, the Developer can set this attribute in the report’s code behind so user can enter the value from UI. 
+                                            Type        : Int32
+                                            Default     : -1 (To maturity)
+                        PartialOrIssueYear = 
+                                            Description : This indicates which year should be an Issue year so the system can handle this year as a Partial or Issue Year. If less than or equal to “0”, the system will treat it like there is not an issue year in the current ledger.
+                                            Type        : Int32
+                                            Default     : 0 (not an issue year for current report)
+                        IssueYearDisplay = 
+                                            Description : This bool tells the system whether issue year should display in the current report or not. 
+                                                          Note: This property works only if PartialOrIssueYear is greater than 0.
+                                            Type        : bool
+                                            Default     : False
+                        FinalYearDisplay = 
+                                            Description : This bool value specifies that the final year should display in the current year or not. The definition of final year is the last year after step the years. 
+                                                          Example: yearstoillustrate = 21, InitialYearsToDisplay = 10 and RowStepsAfterInitialYears = 5 then ledger displays year 1-10,15,20  and the 21st year is a final year, so we can set true or false this attribute to display the 21st year or not.
+                                            Type        : bool
+                                            Default     : false
+                        FinalLineDisplayType = 
+                                            Option      : 1. None 
+                                                          2. FirstLineOnly 
+                                                          3. FirstSummaryAndTotal
+                                                          4. AllLines
+                        InitialYearsToDisplay = 
+                                            Description : This attribute specifies how many years should be displayed before step the years in specify “RowStepsAfterInitialYears” attribute. If less than or equal to “0”, that means the carrier does not want to step years.
+                                            Type        : Int32
+                                            Default     : -1
+                        RowStepsAfterInitialYears = 
+                                            Description : This attribute specifies how many years should be stepped after displaying InitialYearstodisplay. 
+                                                          Example : if there are 21 years in the current model and a carrier wants to display years 1-10,15,20,21 then we can set “5” in this attribute. This will work only if “InitialYearsToDisplay” attribute is set greater than 0.
+                                                          Type    : Int32
+                                                          Default : 5
+                        PaddingForSteptedYears = 
+                                            Description  : this attribute hold the padding for steped year it is used for increase the height of row 
+                                                          for Steped year
+                                            Type         : Int32 :
+                                            Default:     : 2.0f (Normal)
+                        BlankHorizontalRowNumber = 
+                                            Description : This value tells the system to display a blank line after displaying every specified number of years. 
+                                                          Example: if a carrier wants to display a blank line after every 5 years then the developer can set BlankHorizontalRowNumber = “5”.
+                                            Type        : Int32
+                                            Default     : -1 (no Blank line)
+                        BlankHorizontalRowinSteptedYears = 
+                                            Description : This bool attribute indicate to system that a blank line horizontal line should be continue
+                                                           in steped years print after InitialYearsToDisplay some times it not required in mostly times
+                                                           bcz there is option to increase padding in stepted years.
+                                            Type        : bool
+                                            Default     : false
+                        HighlightEveryRowNo = 
+                                            Description : This value signifies which rows should be highlighted by a specified color in a ledger. 
+                                                          Example: if a carrier wants to highlight every 5th row then the developer can set HighlightEveryRowNo = “5”.
+                                            Type        : Int32
+                                            Default     : -1
+                        HighlightColor = 
+                                            Description : This string value indicates the highlighted row’s color name.
+                                            Type        : Int32
+                                            Default     : -1
+                        SummaryYear = 
+                                            Description : This value tells the system to display a summary line after displaying every specified number of years. 
+                                                          Example: if a carrier wants to display a summary line after every 5 years then the developer can set SummaryYear = “5”.
+                                            Type        : string
+                                            Default     : "LightGray"
+                        CaptionForLapseYear = 
+                                            Description : This attribute holds a string to display in columns if a model lapsed in a year before specified in YearsToIllustrate.
+                                            Type        : string
+                                            Default     : "Lapse"
+                        DisplayLapseyearCap = 
+                                            Description : This enum type property specifies how lapse year string displays if a model lapsed before YearsToIllustrate.
+                                                          Following are possible values to set DisplayLapseyearCap:
+                                            Type        : enum
+                                            Default     : FirstLapseYearOnly
+
+                                            Options     : 1. FirstLapseYearOnly  - Display lapse year caption only in first year and blank string in remaining years
+                                                          2. AllLapseYears       - Display lapse year caption in all lapse years
+                        CaptionForTotal = 
+                                            Description : This attribute holds a string to display as a caption in the first column of a total line like “Total: “ Grand Total:”, etc.
+                                            Type        : string
+                                            Default     : "Total:"
+                        CaptionForSummary = 
+                                            Description : This attribute holds a string to display as a caption in the first column of a summary line like “Summary: “ Sub Total:”, etc.
+                                            Type        : string
+                                            Default     : ”Summary:”
+                        CaptionsDisplayColName = 
+                                            Description : Specifies the name column in which the carrier wants to display captions for the total and summery line, etc. Normally it is a first column in a ledger report.
+                                            Type        : string
+                                            Default     : “Years”
+                        YearColumnName = 
+                                            Description : Name of the year column of the raw result set that is holding year data. The FSE4 framework classes are managing year column somewhat differently.
+                                            Type        : string
+                                            Default     : “Years”
+                        AgeColumnName = 
+                                            Description : Name of age column of raw result set which is holding age data. The FSE4 framework classes are managing year column somewhat differently.
+                                            Type        : string
+                                            Default     : “Years”
+                        SymbolDisplayType = 
+                                            Description : Holds an enum value and tells the system in which lines the currency or percentage symbol should print.
+                                                          There are four possible values from which we can set one:
+                                            Type        : Enum
+                                            Default     : AllLines
+                                            Options     :   1. None 2. FirstLineOnly 3. FirstSummaryAndTotal 4. AllLines
+                        GroupSeparatorDisplayType = 
+                                            Description : Holds an enum value that tells the system in which lines the currency group separator should be displayed.
+                                            Type        : Enum
+                                            Default     : AllLines
+                                            Options     : 1. None 2. FirstLineOnly 3. FirstSummaryAndTotal 4. AllLines
+                        RichResultSetLength = 
+                                            Description : This attribute hold a enum value that indicate that what rich result set lenth should be in case of
+                                                          model has lapsed before YearsToIllustration.
+                                            Type        : enum
+                                            Default     : UptoYearsToIllustration
+                                            Options     : 
+                                                          1. UptoYearsToIllustration
+                                                          2. UptoLapseYear
+  
+    <Model Type = > //Set a model for which we want to set formating properties
+      <ArrayOfColumnFormatProvider> // set model level formating properties
+			  <ColumnFormatProvider // Set column level formating properties
+                      
+                      ColumnName                =
+                                            Description : This attribute contains the name of the column to be formatted, set “Default” for non specified columns. 
+                                            Type        : String
+                                            Default     : "Default"
+                      NumberFormatProviderName  =
+                                            Description : This Attribute hold the name of Number format provider that is implement in  <ArrayOfITNumberFormatProvider> which should be apply on current column
+                                            Type        : String
+                                            Default     : "None"
+                                                Options : 1. CurrencyFormatProvide
+                                                          2. PercantageFormatProvider
+                                                          3. NumberFormatProvider
+                                                          4. None
+                                                          5. you can add one more custom <ITNumberFormatProvider> element in <ArrayOfITNumberFormatProvider> specify name and use that.
+                      TotalSummaryType          = 
+                                            Description : This enum type contains a value for what value should be displayed in the total and summary type for the current column
+                                            Type        : Enum
+                                            Default     : Empty
+
+                                                Options : 1. Total
+                                                          2. Summary
+                                                          3. Empty
+                      OmitGroupSeparator        =         
+                                            Description : This attribute contains a true or false for omit group separator for the current column.
+                                            Type        : bool
+                                            Default     : False
+                                                Option  : 1. true
+                                                          2. false 
+                      UseDivisor                = 
+                                            Description : This bool indicates if the value that is being processed should divide the value in the result set by 100. This is necessary due to how QuickView formats numbers and the engine may not provide the output value in the desired format.
+                                            Type        : bool
+                                            Default     : True
+                                            Option      : 1. true
+                                                          2. false 
+                      DecimalDigitRoundType     = 
+                                            Description : This attribute hold an enum value that indicate how decimal digit should be round or remove extra digit.
+                                            Type        : Enum
+                                            Default     : Empty
+                                            Option :
+                                                          1. Round - round decimal digit by Math.round() function
+                                                          2. Truncate - Remove extra decimal digit by String.Substring() function
+                                                          
+              //set column level formating properties for each line type, we must set for a column name "Default" for all column which not set formating properties saperatly
+		          <HeaderLineCellFormatProvider Padding="2.0"  FontName="Arial Narrow" FontSize="10.00" FontBold="true" FontItalic="false" FontStrikeout="false" FontUnderLine="false" Border="None" BorderWidthLeft = "0.5" BorderWidthRight = "0.5" BorderWidthTop = "0.5" BorderWidthBottom = "0.5" ForeColorName="black" BackColorName="White" TextAlignment="Right" />
+              <InitialLineCellFormatProvider Padding="2.0" FontName="Arial Narrow" FontSize="10.00" FontBold="false" FontItalic="false" FontStrikeout="false" FontUnderLine="false" Border="None" BorderWidthLeft = "0.5" BorderWidthRight = "0.5" BorderWidthTop = "0.5" BorderWidthBottom = "0.5" ForeColorName="black" BackColorName="White" TextAlignment="Right" />
+              <NormalLineCellFormatProvider Padding="2.0" FontName="Arial Narrow" FontSize="10.00" FontBold="false" FontItalic="false" FontStrikeout="false" FontUnderLine="false" Border="None" BorderWidthLeft = "0.5" BorderWidthRight = "0.5" BorderWidthTop = "0.5" BorderWidthBottom = "0.5" ForeColorName="black" BackColorName="White" TextAlignment="Right" />
+              <SummaryLineCellFormatProvider Padding="2.0" FontName="Arial Narrow" FontSize="10.00" FontBold="true" FontItalic="true" FontStrikeout="false" FontUnderLine="false" Border="None" BorderWidthLeft = "0.5" BorderWidthRight = "0.5" BorderWidthTop = "0.5" BorderWidthBottom = "0.5" ForeColorName="black" BackColorName="White" TextAlignment="Right" />
+              <TotalLineCellFormatProvider Padding="2.0" FontName="Arial Narrow" FontSize="10.00" FontBold="true" FontItalic="true" FontStrikeout="false" FontUnderLine="false" Border="Bottom" BorderWidthLeft = "0.5" BorderWidthRight = "0.5" BorderWidthTop = "0.5" BorderWidthBottom = "0.5" ForeColorName="black" BackColorName="White" TextAlignment="Right" />
+              <BlankLineCellFormatProvider Padding="10.0"/> 
+ 		  </ColumnFormatProvider>
+    </ArrayOfColumnFormatProvider>  
+=================================================================================
+-->
+<Root>
+  <ArrayOfITNumberFormatProvider>
+    <ITNumberFormatProvider Name = "CurrencyFormatProvider" Type ="c" DecimalDigits ="0" DecimalSeparator = "" GroupSaperator = ""
+                           GroupSizes = "" NegativePattern = "0" PositivePattern = "0" Symbol = "" />
+    <ITNumberFormatProvider Name = "CurrencyFormatProviderWithoutSeperator" Type ="c" DecimalDigits ="0" DecimalSeparator = "" GroupSaperator = ""
+                          GroupSizes = "" NegativePattern = "0" PositivePattern = "0" Symbol = "" />
+    <ITNumberFormatProvider Name = "PercentageFormatProvider" Type ="p" DecimalDigits ="2" DecimalSeparator = "" GroupSaperator = ""
+                            GroupSizes = "" NegativePattern = "1" PositivePattern = "0" Symbol = "" />
+    <ITNumberFormatProvider Name = "NumberFormatProvider" Type ="n" DecimalDigits ="0" DecimalSeparator = "" GroupSaperator = ""
+                            GroupSizes = "" NegativePattern = "1" PositivePattern = "0" Symbol = "" />
+  </ArrayOfITNumberFormatProvider>
+  <ArrayOfCellFormatProvider StyleName="DefaultStyle">
+    <!-- Default cell format provider which is the parent for all CellFormatProviders defined without Base. -->
+    <CellFormatProvider Name="Default" FontName="Allianz Neo Condensed" FontSize="10.0" Border="None" BorderWidthLeft="0.5" BorderWidthRight="0.5" BorderWidthTop="0.5" BorderWidthBottom="0.5" ForeColorName="#5a5c5e" BackColorName="White" TextAlignment="Right" VerticalAlignment="Bottom" PaddingLeft="1.0" PaddingRight ="3.0" PaddingTop="0.75" PaddingBottom="3.25" BorderColorLeft="#A6A6A6" BorderColorRight="#A6A6A6" BorderColorTop="#A6A6A6" BorderColorBottom="#A6A6A6"/>
+    <CellFormatProvider Name="BlankCell" Border="None" />
+
+    <CellFormatProvider Base="DefaultGroupFormat" Name="Header1" FontSize="10.0"  TextAlignment="Left" Border="None" PaddingLeft="3" PaddingTop="1" PaddingBottom="1"  />
+    <CellFormatProvider Base="DefaultGroupFormat" Name="Header1_B" FontSize="10.0"  TextAlignment="Left" Border="Left" PaddingLeft="3"  PaddingTop="1" PaddingBottom="1"/>
+    <CellFormatProvider Base="DefaultGroupFormat" Name="Header2" FontName="Allianz Neo Condensed" FontSize="10.0"  TextAlignment="Left" Border="None" PaddingLeft="3" PaddingTop="1" PaddingBottom="2"/>
+    <CellFormatProvider Base="DefaultGroupFormat" Name="Header2_B" FontName="Allianz Neo Condensed" FontSize="10.0"  TextAlignment="Left" Border="Left" PaddingLeft="3" PaddingTop="1" PaddingBottom="2"/>
+
+    <CellFormatProvider Base="DefaultGroupFormat" Name="Header3" FontName="Allianz Neo Bold" FontSize="12.0"  TextAlignment="Center" PaddingLeft="3" PaddingTop="2" PaddingBottom="4" ForeColorName="#320953" Border="TopBottom" />
+    <CellFormatProvider Base="DefaultGroupFormat" Name="Header5" FontName="Allianz Neo Condensed Bold" FontSize="11.0"  TextAlignment="Center" PaddingLeft="3" PaddingTop="2" PaddingBottom="4" ForeColorName="#005060" Border="TopLeft" />
+    <CellFormatProvider Base="DefaultGroupFormat" Name="Header4" FontName="Allianz Neo Bold" FontSize="10.0"  TextAlignment="Center" Border="None" PaddingLeft="3" PaddingTop="2" PaddingBottom="4" ForeColorName="#320953" BackColorName="#D4EEF0" />
+    <CellFormatProvider Base="DefaultGroupFormat" Name="Header6" FontName="Allianz Neo Bold" FontSize="11.0"  TextAlignment="Center" PaddingLeft="3" PaddingTop="2" PaddingBottom="2" ForeColorName="#005060" Border="Top" />
+    <CellFormatProvider Base="DefaultGroupFormat" Name="Header7" FontName="Allianz Neo Light" FontSize="10.0"  TextAlignment="Center" PaddingLeft="3" PaddingTop="0" PaddingBottom="4" ForeColorName="#005060" Border="None" />
+    
+    
+    
+    <!--Common cell format providers-->
+    <CellFormatProvider Name="BlankFormat" />
+    <!--Group columns-->
+    <CellFormatProvider Name="DefaultGroupFormat" Base="None" FontName="Allianz Neo Condensed Bold" FontSize="12.0" Border="Top" BorderWidthLeft="0.5" BorderWidthRight="0.5" BorderWidthTop="0.5" BorderWidthBottom="0.5" ForeColorName="#005060" BackColorName="#b4e1e5" TextAlignment="Center" PaddingLeft ="1.0" PaddingRight ="1.0" PaddingTop="2.25" PaddingBottom="4.5" BorderColorLeft="#A6A6A6" BorderColorRight="#A6A6A6" BorderColorTop="#A6A6A6" BorderColorBottom="#A6A6A6"/>
+    <CellFormatProvider Base="DefaultGroupFormat" Name="DefaultGroupFormatPF" ForeColorName="#005060" FontName="Allianz Neo Condensed"/>
+    <!--Header lines-->
+    <CellFormatProvider Name="DefaultHeaderLine" Base="None" FontName="Allianz Neo Condensed" FontSize="11.0" Border="TopBottom" BorderWidthLeft="0.5" BorderWidthRight="0.5" BorderWidthTop="0.5" BorderWidthBottom="0.5" ForeColorName="#5a5c5e" BackColorName="#B4E1E5" TextAlignment="Center" VerticalAlignment="Middle" PaddingLeft ="3.0" PaddingRight ="3.0" PaddingTop="2.25" PaddingBottom="4.5" BorderColorLeft="#A6A6A6" BorderColorRight="#A6A6A6" BorderColorTop="#A6A6A6" BorderColorBottom="#A6A6A6"/>
+    <CellFormatProvider Name="CenteredHeaderLine" Base="DefaultHeaderLine" TextAlignment="Center" />
+    <CellFormatProvider Name="TitleFormat" Base="Default" FontName="Allianz Neo Light" FontSize="11" ForeColorName="#005060" TextAlignment="Left" PaddingLeft ="1.0" PaddingRight ="1.0" PaddingTop="1.25" PaddingBottom="4.0"/>
+    <CellFormatProvider Base="DefaultHeaderLine" Name="LeftBorderHeaderLine" Border="TopBottomLeft"/>
+    <CellFormatProvider Base="DefaultHeaderLine" Name="LeftBorderHeaderLinePF" ForeColorName="#005060"  FontName="Allianz Neo Condensed Bold" FontSize="9.0" VerticalAlignment="Bottom" />
+    <CellFormatProvider Base="DefaultHeaderLine" Name="LeftBorderHeaderLineComparison" ForeColorName="#005060"  FontName="Allianz Neo Condensed" FontSize="10.0" VerticalAlignment="Bottom"  BackColorName="#D4EEF0"/>
+
+    <CellFormatProvider Base="LeftBorderHeaderLineComparison" Name="LeftBorderHeaderLine360" BackColorName="#b4e1e5"/>
+    
+    
+    <!--Initial lines-->
+    <CellFormatProvider Name="DefaultInitialLine"  Border="Bottom" BackColorName="#F2F2F2" />
+    <CellFormatProvider Name="CenteredInitialLine" TextAlignment="Center" />
+    <!--Normal lines-->
+    <!--<CellFormatProvider Name="DefaultNormalLine" />-->
+    <CellFormatProvider Name="CenteredNormalLine" TextAlignment="Center" />
+    <CellFormatProvider Base="DefaultInitialLine" Name="DefaultNormalLine" ForeColorName="#4D4D4D" TextAlignment="Center"/>       
+    <CellFormatProvider Base="DefaultInitialLine" Name="LeftBorderNormalLine" Border="BottomLeft"/>   
+    <CellFormatProvider Base="DefaultInitialLine" Name="CenteredNormalLineANeoeBlack" TextAlignment="Center" ForeColorName="#000000" FontName="Allianz Neo Light"/>
+    <!--Blank lines-->
+    <CellFormatProvider Name="DefaultBlankLine" />
+    <!--Summary lines-->
+    <CellFormatProvider Name="DefaultSummaryLine" ForeColorName="#4D4D4D" FontName="Allianz Neo Condensed" Border="Bottom" TextAlignment="Center"/>
+    <CellFormatProvider Name="CenteredSummaryLine" Base="DefaultSummaryLine" TextAlignment="Center" />
+    <!--Total lines-->
+    <CellFormatProvider Name="DefaultTotalLine" Base="DefaultSummaryLine" />
+    <CellFormatProvider Name="CenteredTotalLine" Base="DefaultSummaryLine" TextAlignment="Center"/>
+    <CellFormatProvider Base="DefaultTotalLine" Name="LeftBorderTotalLine" Border="BottomLeft"  />
+    <!--Bottom row lines-->
+    <CellFormatProvider Name="DefaultBottomLine" Base="None" FontName="Arial" FontSize="8.0" Border="Bottom" BorderWidthLeft="0.5" BorderWidthRight="0.5" BorderWidthTop="0.5" BorderWidthBottom="0.5" ForeColorName="black" BackColorName="LightGray" TextAlignment="Right" PaddingLeft="1.0" PaddingRight ="1.0" PaddingTop="1.0" PaddingBottom="1.0"/>
+    <CellFormatProvider Name="LeftBorderBottomLine" Base="DefaultBottomLine" Border="BottomLeft" />
+    <CellFormatProvider Name="RightBorderBottomLine" Base="DefaultBottomLine" Border="BottomRight" />
+  </ArrayOfCellFormatProvider>
+  <ArrayOfCellFormatProvider StyleName="DefaultStyle_Highlight">
+    <!--Initial lines-->
+    <CellFormatProvider Name="DefaultInitialLine" BackColorName="LightGray" />
+    <!--Normal lines-->
+    <CellFormatProvider Name="DefaultNormalLine" BackColorName="LightGray" />       
+    <CellFormatProvider Name="CenteredNormalLine" BackColorName="LightGray" />
+  </ArrayOfCellFormatProvider>
+
+  <ArrayOfCellFormatProvider StyleName="DefaultStyle_HighlightPF">
+    <CellFormatProvider Name="DefaultNormalLine" BackColorName="#E2E2E2"/>   
+    <CellFormatProvider Name="CenteredNormalLineANeoeBlack" BackColorName="#E2E2E2"/>
+    <CellFormatProvider Name="LeftBorderNormalLine" BackColorName="#E2E2E2"/>
+  </ArrayOfCellFormatProvider>
+  <Report ID  = "1" >
+    <ColumnReportConfig PartialOrIssueYear = "0" IssueYearDisplay = "false" FinalYearDisplay = "true"
+												InitialYearsToDisplay = "-1" RowStepsAfterInitialYears = "0" BlankHorizontalRowNumber = "0"
+                        HighlightEveryRowNo = "-1" HighlightEveryYear = "-1" HighlightColor="LightGray"
+                        CaptionForLapseYear = "Lapse" DisplayLapseyearCap = "FirstLapseYearOnly"
+                        CaptionForTotal = "Total" CaptionForSummary = "Summary" SummaryYear = "-1"
+                        SymbolDisplayType = "AllLines" GroupSeparatorDisplayType = "AllLines" />
+    <ArrayOfColumnFormatProvider>
+      <ColumnFormatProvider ColumnName ="Default" HeaderCellFormatProviderName="LeftBorderHeaderLinePF" InitialCellFormatProviderName="DefaultNormalLine" NormalCellFormatProviderName="DefaultNormalLine" NumberFormatProviderName = "CurrencyFormatProvider" OmitGroupSeparator="false" UseDivisor = "false" DecimalDigitRoundType = "Round" IsSpecialColumn="true"/>     
+       <ColumnFormatProvider ColumnName ="LeftBorder" HeaderCellFormatProviderName="LeftBorderHeaderLine" InitialCellFormatProviderName="LeftBorderNormalLine"
+                           NormalCellFormatProviderName="LeftBorderNormalLine" BlankCellFormatProviderName="LeftBorderNormalLine"
+                           TotalCellFormatProviderName="LeftBorderTotalLine"/>
+      <ColumnFormatProvider ColumnName ="NoFormatCentered" HeaderCellFormatProviderName="LeftBorderHeaderLinePF" InitialCellFormatProviderName="DefaultNormalLine" NormalCellFormatProviderName="DefaultNormalLine" IsSpecialColumn="true"/>
+      <ColumnFormatProvider ColumnName ="PercentColumn" HeaderCellFormatProviderName="LeftBorderHeaderLinePF" InitialCellFormatProviderName="DefaultNormalLine" NormalCellFormatProviderName="DefaultNormalLine" NumberFormatProviderName = "PercentageFormatProvider" OmitGroupSeparator="false" UseDivisor = "false" DecimalDigitRoundType = "Round" IsSpecialColumn="true"/>      
+    </ArrayOfColumnFormatProvider>
+    <ColumnHeaders>
+    </ColumnHeaders>
+  </Report>
+  
+</Root>
