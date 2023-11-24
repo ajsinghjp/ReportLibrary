@@ -1,0 +1,57 @@
+   protected override void InitializeLedgerReports(List<SalesPortal.LedgerReport> ledgerReports)
+        {
+            LedgerReport ledger = new LedgerReport((Int32)LedgerReportId.Default);			
+            ledger.FormatReportID = 2;
+
+			//To have blank rows with horizontal line every 5 rows.
+			ledger.RowsTogether = 5;
+			ledger.SetHighlightRow(ledger.RowsTogether, true, "DefaultStyle_Highlight");
+
+			//Preface section Table
+			ledger.AddTitle(GetTitleTable(), "TitleFormat");
+
+            //Add the proper result set
+            ledger.AddResultSet(InputSupplement.GuaranteedResultSet);
+            ledger.AddResultSet(InputSupplement.HasDividendReduction ? InputSupplement.AssumedResultSet : InputSupplement.PrimaryResultSet);
+			
+            ledgerReports.Add(ledger);
+			}
+			
+					private ITPdfPTable GetTitleTable()
+		{
+			TextReportBuilder textBuilder = GetSummaryTextBuilder();
+			
+			SetSummaryTabeHeader(textBuilder, "TABULAR DETAIL");
+
+			textBuilder.AddLine(ReportStyles.ThinBorder, true, true);
+			textBuilder.AddSubhead(String.Format("{0}\n{1}", InputSupplement.ProductName, InputSupplement.PlanType));
+			textBuilder.NextColumn();
+			textBuilder.SpaceBetween = 1.5f;
+			textBuilder.AddItemXML("CT_WL_LB_Title_Para1");
+			if (InputSupplement.APIDumpInAmount > 0 && InputSupplement.ExchangeAmount > 0 && InputSupplement.API1035Amount > 0 && InputSupplement.NonAPI1035Amount > 0)
+			{
+				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_APIAndExchGtAPI1035");
+			}
+			else if (InputSupplement.APIDumpInAmount > 0 && InputSupplement.ExchangeAmount > 0)
+			{
+				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_APIAndExch");
+			}
+			else if (InputSupplement.ExchangeAmount > 0 && InputSupplement.API1035Amount > 0 && InputSupplement.NonAPI1035Amount > 0)
+			{
+				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_ExchGtAPI1035");
+			}
+			else if (InputSupplement.ExchangeAmount > 0)
+			{
+				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_Exch");
+			}
+			else if (InputSupplement.APIDumpInAmount > 0)
+			{
+				textBuilder.AddItemXML("CT_WL_LB_Title_Para2_API");
+			}
+
+			textBuilder.AddItemXML("CT_WL_LB_Title_Para3");
+		
+			textBuilder.AddBlankSpace(12.75f);
+
+			return textBuilder.GetTable();
+		}
