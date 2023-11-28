@@ -1,0 +1,54 @@
+<div id="section">
+	<div id="title">
+		Generic Code<br/>
+		Numbered list example
+	<hr/>
+	</div>
+	<div id="image">
+		Image Reference<br/>
+		<img src="List_Numbered.PNG" width="1000" height="200" border="5">
+		
+	</div>
+	<div id="codesinppet1">
+		<div>
+		Code Snippet of <b>Report.cs</b><br/>
+<textarea rows="25" cols="200" multiple="true" >	
+	TextReportBuilder textBuilder = new TextReportBuilder(this);
+	textBuilder.DefaultFont = ITItextFontFactory.GetFont("Tahoma", 10, Font.NORMAL);; 
+	textBuilder.SetSpaces(5.0f, 1.5f, 5.0f, 0.0f, 1.5f);
+
+	textBuilder.AddSubhead("Numbered list example");
+	textBuilder.AddItemXML("XMLPara_NumberedListExamplePara1");
+	textBuilder.SetNumberedList();
+	textBuilder.AddListItemXML("XMLPara_NumberedListExampleList1");
+	textBuilder.AddItemXML("XMLPara_NumberedListExamplePara2");            
+	textBuilder.SetNumberedList(11, 1, String.Empty, ")");
+	textBuilder.AddListItemXML("XMLPara_NumberedListExampleList2");	
+
+	textBuilder.AddToDocument(_reportDocument);	
+</textarea>
+
+		</div>
+		<div>
+			Code Snippet of <b>Report.xml</b><br/>
+<textarea rows="20" cols="200" multiple="true" >	
+	<paragraph reportID="1" name="Detail" Key="XMLPara_NumberedListExamplePara1" >
+		<p>SetNumberedList() is used to set the following list items.</p>
+	</paragraph>
+	<paragraph reportID="1" name="Detail" Key="XMLPara_NumberedListExampleList1" >
+		<p>Numbered list item 1</p>
+		<p>Numbered list item 2</p>
+	</paragraph>
+	<paragraph reportID="1" name="Detail" Key="XMLPara_NumberedListExamplePara2" >
+		<p>SetNumberedList(11, 1, String.Empty, ")") is used to set the following list items. The seed value is 11, indentation level is 1, and the list symbols are followed by a closing parenthesis.</p>
+	</paragraph>
+	<paragraph reportID="1" name="Detail" Key="XMLPara_NumberedListExampleList2" >
+		<p>Numbered list item 11</p>
+		<p>Numbered list item 12</p>
+	</paragraph>		
+
+</textarea>
+		</div>
+	</div>
+</div>
+

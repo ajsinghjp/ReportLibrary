@@ -1,0 +1,46 @@
+<div id="section">
+	<div id="title">
+		Client Reference : PRO6<br/>
+		Module Name : FSFIA<br/>	
+		File Name : ReportBase.cs, CommonText.xml
+	<hr/>
+	</div>
+	<div id="image">
+		Image Reference<br/>
+		<img src="PagNumber_In_Footer.PNG" width="1000" height="200" border="5">
+		
+	</div>
+	<div id="codesinppet1">
+		<div>
+		Code Snippet of <b>ReportBase.cs</b><br/>
+<textarea rows="10" cols="200" multiple="true" >	
+	/// <summary>
+	/// override method used to set page Footer
+	/// </summary>
+	/// <returns>ITPdfPTable</returns>
+	protected override ITPdfPTable GetPageFooter()
+	{
+		ITPdfPTable iTPdfPTable = new ITPdfPTable(1, DocumentFrame.ContentWidthInPercent, 0, 0, Rectangle.NO_BORDER);
+		
+		iTPdfPTable.AddColumns(DocumentFrame.ContentWidth, 100f);
+
+		iTPdfPTable.AddCell(base.ReadFromCommonTextHelperForTemplate("PageNoCaption", Rectangle.ALIGN_CENTER, iTPdfPTable, 1, 0, true), Rectangle.ALIGN_CENTER, Rectangle.NO_BORDER, 1);
+		
+		return iTPdfPTable;
+	}
+
+</textarea>
+
+		</div>
+		<div>
+			Code Snippet of <b>CommonText.xml</b><br/>
+<textarea rows="10" cols="200" multiple="true" >	
+	<paragraph Key="PageNoCaption" projectionType="Assumed">
+		<p><font size="9" face="Libre Franklin">Page n of m</font></p>
+	</paragraph>	
+
+</textarea>
+		</div>
+	</div>
+</div>
+

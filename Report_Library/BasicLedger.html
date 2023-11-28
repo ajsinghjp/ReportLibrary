@@ -1,0 +1,42 @@
+<div id="section">
+	<div id="title">
+	Client Reference : ONL<br/>
+	Module Name : FIA<br/>
+	File Name : Ledger.cs<br/>
+	<hr/>
+	</div>
+	<div id="image">
+		Image Reference<br/>
+		<img src="LedgersTable.png">
+		
+	</div>
+	<div id="codesinppet">
+		<div>
+		Code Snippet<br/>
+			<textarea rows="30" cols="100" multiple="true" >	
+		 protected void SetLedgerProperties(LedgerReport ledger)
+			{
+			ledger.ConditionFields = CurrentInitialData.ConditionFields;\n
+			
+			//The below settings are to keep all the total line, normal lines and footnote section together in the one page.<br/>
+			ledger.KeepTogetherLedgerTableAndEndnote = true;<br/>
+			ledger.KeepTogetherFinalTotalLine = true;<br/>
+			ledger.RowsTogether = 5;<br/>
+			ledger.TitleSectionLeading = Leading;<br/>;<br/>
+
+			ledger.RowHeight = 10.85f;<br/>
+			ledger.TotalRowHeight = 10.85f;<br/>;<br/>
+
+			ledger.TotalSummaryDuration = TotalSummaryType.None;<br/>
+			//To have a border line at the bottom of the table<br/>
+			ledger.BottomRowHeight = 0.5f;<br/>;<br/>
+
+			ledger.SetHighlightRow(2, true, 'DefaultStyle_Highlight');<br/>
+			//ledger.SetStepRowsToDisplay(20, 5, 'DefaultStyle_SteppedYears');<br/>
+		}
+		</textarea>
+
+		</div>
+	</div>
+</div>
+

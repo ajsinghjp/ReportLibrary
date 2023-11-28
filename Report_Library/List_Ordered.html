@@ -1,0 +1,64 @@
+<div id="section">
+	<div id="title">
+		Generic Code<br/>
+		Ordered list example
+	<hr/>
+	</div>
+	<div id="image">
+		Image Reference<br/>
+		<img src="List_Ordered.png" width="1000" height="200" border="5">
+		
+	</div>
+	<div id="codesinppet1">
+		<div>
+		Code Snippet of <b>Report.cs</b><br/>
+<textarea rows="25" cols="200" multiple="true" >	
+	TextReportBuilder textBuilder = new TextReportBuilder(this);
+	textBuilder.DefaultFont = ITItextFontFactory.GetFont("Tahoma", 10, Font.NORMAL);; 
+	textBuilder.SetSpaces(5.0f, 1.5f, 5.0f, 0.0f, 1.5f);
+	Font _fontContentBold = ITItextFontFactory.GetFont("Tahoma Bold", 10, Font.NORMAL);
+
+	textBuilder.AddSubhead("Ordered list example");
+	textBuilder.AddItemXML("XMLPara_OrderedListExamplePara1");
+	textBuilder.SetOrderedList('A');
+	textBuilder.AddListItemXML("XMLPara_OrderedListExampleList1");
+	textBuilder.AddListItem("List item 3: The font is specified exclusively through AddListItem().", _fontContentBold);
+
+	textBuilder.AddItemXML("XMLPara_OrderedListExamplePara2");
+	textBuilder.SetOrderedList('a', 1, "(", ")");
+	textBuilder.AddListItemXML("XMLPara_OrderedListExampleList2");            
+
+	textBuilder.AddToDocument(_reportDocument);
+	textBuilder.AddItemXML("XMLPara_UnorderedListExamplePara1");
+	textBuilder.SetUnorderedList("-", 1);
+	textBuilder.AddListItemXML("XMLPara_UnorderedListExampleList1");           
+
+	textBuilder.AddToDocument(_reportDocument);
+	
+</textarea>
+
+		</div>
+		<div>
+		Code Snippet of <b>Report.xml</b><br/>
+<textarea rows="20" cols="200" multiple="true" >	
+	<paragraph reportID="1" name="Detail" Key="XMLPara_OrderedListExamplePara1" >
+		<p>SetOrderedList('a') is used to set the following list items. 'A' is the seed character which is the list symbol for the first item.</p>
+	</paragraph>
+	<paragraph reportID="1" name="Detail" Key="XMLPara_OrderedListExampleList1" >
+		<p>List item 1 which is from XML.</p>
+		<p>List item 2 which is from XML.</p>						
+	</paragraph>
+	<paragraph reportID="1" name="Detail" Key="XMLPara_OrderedListExamplePara2" >
+		<p>SetOrderedList('a', 1, "(", ")") is used to set the following list items. The seed character is 'a', indentation level is 1, and the list symbols are put in parenthesis.</p>
+	</paragraph>
+	<paragraph reportID="1" name="Detail" Key="XMLPara_OrderedListExampleList2" >
+		<p>List item 1</p>
+		<p>List item 2</p>
+	</paragraph>
+	
+
+</textarea>
+		</div>
+	</div>
+</div>
+

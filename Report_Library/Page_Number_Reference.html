@@ -1,0 +1,116 @@
+
+<div id="section">
+	<div id="title">
+		Client Reference : AIG<br/>
+		Module Name : FIA<br/>	
+		File Name : SupplementalInput.cs, InterestCreditingIllustration.cs, IllustrationScenarioDisclosurePage.cs, IllustrationScenarioDisclosurePage.xml
+	<hr/>
+	</div>
+	<div id="image">
+		Image Reference<br/>
+		<img src="Page_Number_Reference.PNG" width="1000" height="200" border="5">
+		
+	</div>
+	<div id="codesinppet1">
+		<div>
+		Code Snippet of <b>SupplementalInput.cs</b><br/>
+<textarea rows="8" cols="200" multiple="true" >	
+	/// <summary>
+	/// Interest Crediting Ledger Page First Page
+	/// </summary>
+	public String InterestCreditingPages
+	{
+		get { return _interestCreditingPages; }
+		set { _interestCreditingPages = value; }
+	}
+	private String _interestCreditingPages = String.Empty;
+
+</textarea>
+		</div>
+		<div>
+			Code Snippet of <b>InterestCreditingIllustration.cs</b><br/>
+<textarea rows="8" cols="200" multiple="true" >	
+	/// <summary>
+	/// Gets the group header list.
+	/// </summary>
+	/// <returns></returns>
+	protected override ArrayList GetGroupHeaderList()
+	{
+		if (InputSupplement.InterestCreditingPages == String.Empty)
+			InputSupplement.InterestCreditingPages = _reportDocument.CurrentPageNumber.ToString();          
+	
+		ArrayList groupHeaderList = new ArrayList();            
+	
+		return groupHeaderList;
+	}	
+
+</textarea>
+		</div>
+		
+		<div>
+			Code Snippet of <b>IllustrationScenarioDisclosurePage.cs</b><br/>
+<textarea rows="20" cols="200" multiple="true" >	
+	public override void BuildDetailSection()
+	{  
+		ITPdfPTable iTPdfPTableMain = new ITPdfPTable(1, 100, 5, 0, Rectangle.NO_BORDER, this);
+		iTPdfPTableMain.AddBlankColumn(3);
+		iTPdfPTableMain.AddBlankColumn(97);
+		iTPdfPTableMain.AddCell(GetDetailCell2("ISDP_IntrestCrediting_Para1"));
+		_reportDocument.Add(iTPdfPTableMain);
+	}
+
+	/// <summary>
+	/// Returns a ITPdfPTable Table
+	/// </summary>     
+	protected ITPdfPTable GetDetailCell2(String KeyName)
+	{
+		ITPdfPTable iTPdfPTable = new ITPdfPTable(2, 100, 0, 0, 0, this);
+		iTPdfPTable.AddBlankColumns(1.5f, 98.5f);
+		iTPdfPTable.SetPaddings(0.0f, 0, 0, 10);
+
+		iTPdfPTable.AddCell(base.ReadFromReportTextHelper("Detail", "ParaDot"), iTextSharp.text.Rectangle.ALIGN_LEFT, 0, 0, 1);
+		iTPdfPTable.AddCell(base.ReadFromTextHelperForTemplate("Detail", KeyName, iTextSharp.text.Rectangle.ALIGN_LEFT, iTPdfPTable, 2, 1), iTextSharp.text.Rectangle.ALIGN_LEFT);
+		iTPdfPTable.SetPaddings(0.0f, 0, 10, 2);
+		return iTPdfPTable;
+	}
+
+</textarea>
+		</div>
+		<div>
+			Code Snippet of <b>IllustrationScenarioDisclosurePage.xml</b><br/>
+<textarea rows="20" cols="200" multiple="true" >	
+	<paragraph reportID="24" name="Detail" Key="ISDP_IntrestCrediting_Para1">
+		<p><font face="Swis721 BT Bold">Interest Crediting and Accumulation Value Details for Each Allocated Interest Crediting Strategy (Page InterestCreditingPages):</font><font face="Swis721 Md BT Medium"> This scenario illustrates the values associated with each individual interest crediting strategy from the specific period scenario on the previous page.</font></p>
+	</paragraph>
+	 
+	 <paragraph reportID="24" name="Detail" Key="ParaDot">
+	 <p><font face="Swis721 Md BT Medium">•</font> </p>
+	 </paragraph>
+
+</textarea>
+		</div>
+		<div>
+			Code Snippet of <b>CloseDocument.cs</b><br/>
+<textarea rows="20" cols="200" multiple="true" >	
+	/// <summary>
+	/// Closes the document.
+	/// </summary>
+	/// <param name="pdfWriter">The PDF writer.</param>
+	/// <param name="document">The document.</param>
+	protected override void CloseDocument(iTextSharp.text.pdf.PdfWriter pdfWriter, Document document)
+	{            
+		for (Int32 loop = 0; loop < _reportDocument.CurrentPageNumber; loop++)
+		{    
+			//Replace InterestCreditingPages text by  InputSupplement.InterestCreditingPages varivle         
+			base.ReplaceTextInTemplate("InterestCreditingPages", InputSupplement.InterestCreditingPages);              
+		}
+	
+		//Call base method
+		base.CloseDocument(pdfWriter, document);
+	}		
+
+</textarea>
+		</div>
+	</div>
+</div>
+

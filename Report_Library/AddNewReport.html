@@ -1,0 +1,71 @@
+<div id="section">
+	<div id="title">
+		Client Reference : PRO6<br/>
+		Module Name : FSFIA<br/>	
+		File Name : CoverPage.cs, CoverPage.xml, Constants.cs, ReportConfig.xml  
+	<hr/>
+	</div>
+	<div id="image">
+		Image Reference<br/>
+		<img src="AddNewReport.PNG" width="800" height="800" border="5">
+		<img src="AddNewReport2.PNG" width="500" height="800" border="5">
+		
+	</div>
+	<div id="codesinppet1">
+		<div>
+		Code Snippet of <b>Constants.cs</b><br/>
+<textarea rows="10" cols="200" multiple="true" >	
+	#region Report ID Enums
+	/// <summary>
+	/// This enum describes the reports that can be rendered in for this product.
+	/// </summary>
+	public enum ReportIDFSFIA
+	{
+		/// <summary>
+		/// Cover Page ID
+		/// </summary>
+		CoverPageID = 1
+ 	}
+	#endregion Report ID Enums
+
+</textarea>
+
+		</div>
+		<div>
+			Code Snippet of <b>ReportConfig.xml</b><br/>
+<textarea rows="10" cols="200" multiple="true" >	
+	<reportProperty reportID="ReportIDFSFIA.CoverPageID" modelType="FS_ModelType.Current"
+		isEnabled="true" validate="false" availabilityDate="2004-06-22"
+		pageNumberSetting="FS_ReportPageNumbering.Reset" reportSelectView="FS_ReportSelectView.Required"
+		isSelected="true" isMultiRun="false" watermark = "false" textWatermark="true">
+		<pageTitle>Cover Page</pageTitle>
+		<selectionDescription>Cover Page</selectionDescription>
+		<bookmarkDescription>Cover Page</bookmarkDescription>          
+		<pdfFileName/>
+		<xmlFileName>CoverPage.xml</xmlFileName>
+		<flyOverHelp/>
+		<classType>InsTech.ForeSight.SalesPortal.Annuity.FSFIA.iText.CoverPage</classType>
+		<assemblyName>SalesPortal.FSFIA.iTextSharp, Version=6, Culture=neutral, PublicKeyToken=928c297f0d8e5e72</assemblyName>
+  </reportProperty>	
+
+</textarea>
+		</div>
+		<div>
+			Code Snippet of <b>CoverPage.cs</b><br/>
+<textarea rows="10" cols="200" multiple="true" >	
+	When we add new report in our project then we will add .cs file in iTextSharp project Reports Folder.
+	
+	In .cs file we will make changes as [Header, Detail, Footer] per requirement.
+</textarea>
+		</div>
+		<div>
+			Code Snippet of <b>CoverPage.xml</b><br/>
+<textarea rows="10" cols="200" multiple="true" >	
+	When we add new report in our project then we will add .xml file in iTextSharp project XmlDocs Folder.
+	
+	In .xml file we will add report pragraphs.
+</textarea>
+		</div>
+	</div>
+</div>
+
